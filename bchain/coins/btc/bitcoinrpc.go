@@ -178,7 +178,7 @@ func (b *BitcoinRPC) InitializeMempool(addrDescForOutpoint bchain.AddrDescForOut
 	b.Mempool.AddrDescForOutpoint = addrDescForOutpoint
 	b.Mempool.OnNewTxAddr = onNewTxAddr
 	b.Mempool.OnNewTx = onNewTx
-	if b.mq == nil {
+	if b.mq == nil && b.ChainConfig.MessageQueueBinding != "" {
 		mq, err := bchain.NewMQ(b.ChainConfig.MessageQueueBinding, b.pushHandler)
 		if err != nil {
 			glog.Error("mq: ", err)
